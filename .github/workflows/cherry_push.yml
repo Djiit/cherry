@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   cherry:
@@ -18,13 +19,8 @@ jobs:
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.1
+          bundler-cache: true
 
-      - name: Install dependencies
+      - name: test
         run: |
-          bundle install
-          npm install
-          npm install -g cherrypush
-
-      - name: Push metrics
-        run: cherry push --api-key=${{ secrets.CHERRY_API_KEY }}
+          bundle exec rubocop
