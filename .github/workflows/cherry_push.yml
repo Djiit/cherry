@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   cherry:
@@ -26,4 +27,5 @@ jobs:
           npm install -g cherrypush
 
       - name: Push metrics
-        run: cherry push --api-key=${{ secrets.CHERRY_API_KEY }}
+        # run: cherry push --api-key=${{ secrets.CHERRY_API_KEY }}
+        run: cherry run
